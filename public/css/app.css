@@ -1,0 +1,322 @@
+@charset "UTF-8";
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes scaleIn {
+  from {
+    transform: scale(var(--scale-from--));
+  }
+  to {
+    transform: scale(var(--scale-to--));
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(var(--slide-from--));
+  }
+  to {
+    transform: translateX(var(--slide-to--));
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(var(--slide-from--));
+  }
+  to {
+    transform: translateY(--slide-to--);
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("/image/background.jpg");
+  background-size: cover;
+}
+
+hr {
+  height: 1px;
+  border: none;
+  background-color: #000000;
+}
+
+p {
+  text-indent: 25px;
+}
+
+.nav .nav-collapse {
+  margin-left: 100px;
+}
+
+.nav .navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: transparent;
+  backdrop-filter: blur(50px);
+  z-index: 1000;
+}
+
+.nav .nav-item {
+  margin-left: 25px;
+}
+
+.nav .nav-item:hover {
+  background-color: rgba(126, 111, 79, 0.6);
+  border-radius: 10px;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+}
+
+.active {
+  font-weight: bold;
+  background-color: rgba(120, 94, 41, 0.6);
+  border-radius: 10px;
+}
+
+.body-frame {
+  margin-top: 56px;
+}
+
+section {
+  height: calc(100vh - 58px);
+  background-size: cover;
+}
+
+.notfoundpage {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.homepage {
+  display: flex;
+  text-align: center;
+  position: relative;
+  height: calc(100vh - 58px);
+}
+
+.homepage .home-block {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  --scale-from--: 0.5;
+  --scale-to--: 1;
+  animation: scaleIn ease-in-out 1s;
+}
+
+.home-block .home-left {
+  width: 65vh;
+}
+
+.homepage .home-block .thesis-name {
+  text-align: center;
+  width: 65%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.homepage .home-block .home-info {
+  padding-top: 20px;
+}
+
+.homepage .home-block .home-logo {
+  width: 100px;
+  height: 100px;
+  margin: 50px 50px;
+  background-size: cover;
+}
+
+.homepage .home-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-image: url("/image/home-1.jpg");
+  background-size: cover;
+  z-index: 1001;
+  --slide-from--: 100%;
+  --slide-to--: 0;
+  animation: slideIn forwards 1s;
+}
+
+.aboutpage {
+  height: calc(100vh - 58px);
+  --slide-from--: 100%;
+  --slide-to--: 0;
+  animation: slideIn forwards 0.5s;
+  display: flex;
+}
+
+.about-menu {
+  height: 100%;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  width: 23%;
+  padding: 5px;
+  border: 2px solid #333;
+  z-index: 1000;
+  border-radius: 5px;
+  overflow-y: auto;
+  --scale-from--: 0.5;
+  --scale-to--: 1;
+  animation: scaleIn ease-in-out 0.5s;
+}
+
+.about-menu h4 {
+  margin: 25px 0;
+  text-align: center;
+}
+
+.about-menu a {
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  color: #0a9984;
+  font-style: italic;
+}
+
+.about-image {
+  background-size: contain;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 23%;
+  z-index: 1001;
+}
+
+.aboutpage .about-content {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+}
+
+.aboutpage .about-header {
+  text-align: center;
+  padding: 5px;
+  border: 2px solid #333;
+}
+
+.aboutpage .about-logo {
+  width: 100px;
+  height: 100px;
+  margin: 30px;
+}
+
+.aboutpage .about-title {
+  margin-top: 30px;
+}
+
+.aboutpage .about-entitle {
+  margin-bottom: 30px;
+}
+
+.aboutpage .about-teacher {
+  margin-top: 30px;
+  margin-bottom: 3px;
+}
+
+.aboutpage .about-thanks {
+  position: relative;
+}
+
+.aboutpage .about-thanks-title {
+  text-align: center;
+  margin: 30px 0;
+  right: 0;
+}
+
+.aboutpage .about-thanks h4 {
+  text-align: right;
+}
+
+.checksourcepage {
+  background-image: url("/image/background-3.jpg");
+}
+
+.checksourcepage .checksource-block {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.checksourcepage .checksource-form {
+  --slide-from--: -100%;
+  --slide-to--: 0;
+  animation: slideDown forwards 1s;
+}
+
+.checksourcepage .checksource-form .checksource-input {
+  width: 100%;
+  display: flex;
+}
+
+.checksourcepage .checksource-form .checksource-link {
+  width: 100%;
+  border: 2px solid #ccc; /* Viền input */
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.checksourcepage .checksource-form input {
+  margin: 0 5px;
+  width: 100%;
+  padding: 0 5px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.checksourcepage .checksource-form .checksource-submit {
+  background: url("/image/enter.png") no-repeat;
+  background-size: contain;
+  width: 38px;
+  margin-left: 10px;
+  border: none;
+}
+
+.checksourcepage .checksource-form .checksource-link:hover {
+  border-color: #000000;
+}
+
+.checksourcepage .checksource-loading {
+  margin-top: 30px;
+}
+
+.checksourcepage .checksource-loading img {
+  width: 70%;
+  height: 30px;
+  background-size: contain;
+}
+
+.checksourcepage .progress {
+  width: 70%;
+  height: 5px;
+  background-color: #000000;
+}
+
+.checksourcepage .progress-bar {
+  background-color: rgb(226, 220, 220);
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22../../resources/scss/app.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22;AAEA;EACI;IACI;;EAEJ;IACI;;;AAIR;EACI;IACI;;EAEJ;IACI;;;AAIR;EACI;IACI;;EAEJ;IACI;;;AAIR;EACE;IACE;;EAGF;IACE;;;AASJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;;;AAOJ;EACI;;;AAGJ;EAEI;EACA;EACA;EACA;EACA;EAEA;;;AAGJ;EACI;;;AAGJ;EACI;EACA;;;AAeJ;EACI;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;;;AAIJ;EAEI;EAEA;;;AAMJ;EACI;EACA;EACA;EACA;EACA;;;AAKJ;EACI;EACA;EACA;EAEA;;;AAGJ;EACI;EACA;EACA;EAEA;EACA;EACA;;;AAKJ;EACI;;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;;AAKJ;EACI;;;AAGJ;EAGI;EACA;EAGA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAOJ;EAEI;EACA;EACA;EACA;EACA;;;AASJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EAEA;EACA;EACA;;;AAGJ;EACI;EACA;;;AAKJ;EACI;EACA;EACA;EACA;;;AAKJ;EACI;EACA;EAEA;EACA;EACA;EACA;;;AAMJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;;;AAIJ;EACI;;;AAGJ;EACI;EACA;;;AAKJ;EACI;;;AAGJ;EAEI;EACA;EACA;;;AAGJ;EACI;;;AAMJ;EACI;;;AAGJ;EACI;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;;;AAGJ;EACI;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI;EACA;EACA;;;AAGJ;EACI%22,%22file%22:%22app.css%22%7D */
