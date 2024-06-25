@@ -44,18 +44,18 @@ $(".checksource-form").addEventListener("submit", function(event) {
     event.preventDefault(); // Ngăn chặn việc submit form mặc định
 
     var sourceName = $(".checksource-name").value // Lấy giá trị từ ô source name
-    var sourceVersion = $(".checksource-name").value // Lấy giá trị của ô source version
+    var sourceEcosystem = $(".checksource-ecosystem").value // Lấy giá trị của ô source version
     console.log(sourceName)
   
     // Kiểm tra xem giá trị có tồn tại và không rỗng
-    if (sourceName.trim() !== "" && sourceVersion.trim() !== "") {
+    if (sourceName.trim() !== "" && sourceEcosystem.trim() !== "") {
     // Tạo request hoặc xử lý dữ liệu ở đây (ví dụ sử dụng fetch API)
         fetch('/checksource', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name: sourceName, version: sourceVersion }),
+            body: JSON.stringify({ name: sourceName, ecosystem: sourceEcosystem  }),
         })
         .then(response => response.json())
         .then(data => {
@@ -67,8 +67,8 @@ $(".checksource-form").addEventListener("submit", function(event) {
             
         });
         $('.checksource-name').value = ''
-        $('.checksource-version').value = ''
+        $('.checksource-ecosystem').value = ''
     } else {
-        alert("Vui lòng nhập tên người dùng trước khi gửi.")
+        alert("")
     }
 });

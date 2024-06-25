@@ -1,13 +1,18 @@
-class CheckSourceController{
-    get(req, res){
-        // console.log('body:', req.body?.link);
+const path = require('path')
+path.join(__dirname, '../package-analysis/scripts/run_analysis.sh')
+const { run_package_analysis } = require(path.join(__dirname, '../../scripts/run_package_analysis.js'));  // Adjust the path accordingly
 
-        res.render('checkSource')
+class CheckSourceController {
+    get(req, res) {
+        res.render('checkSource');
     }
 
-    post(req, res){
-        res.json({message: 'đã nhận được rồi', name: req.body?.name})
+    post(req, res) {
+        const packageName = req.body.name;
+        const ecosystem = req.body.ecosystem;
+
+        run_package_analysis(packageName, ecosystem, res);
     }
 }
 
-module.exports = new CheckSourceController
+module.exports = new CheckSourceController();

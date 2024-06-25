@@ -1,14 +1,14 @@
 <section class="checksourcepage">
     <div class="checksource-block">
-        <form class="checksource-form" action="/checksource?xq=hihi">
+        <form mathod="post" class="checksource-form" action="/checksource">
             <div class="checksource-input">
                 {{!-- <input type="text" placeholder="Github link to source code..." class="checksource-link"> --}}
-                <input type="text" placeholder="source name" class="checksource-name">
-                <input type="text" placeholder="version" class="checksource-version">
+                <input type="text" placeholder="package name" class="checksource-name" name="package-name" required>
+                <input type="text" placeholder="ecosystem" class="checksource-ecosystem" name="package-ecosystem" required>
                 <input type="submit" value="" class="checksource-submit">
             </div>
             <div>
-                <b>Please type name and version of open source you want to check out...</b>
+                <b>Please type name and ecosystem of open source you want to check out...</b>
             </div>
         </form>
         <div class="checksource-loading">
@@ -23,3 +23,5 @@
         </div> --}}
     </div>
 </section>
+
+
