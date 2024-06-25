@@ -1,11 +1,12 @@
 #!/bin/bash
 
-RESULTS_DIR=${RESULTS_DIR:-"/tmp/results"}
-STATIC_RESULTS_DIR=${STATIC_RESULTS_DIR:-"/tmp/staticResults"}
-FILE_WRITE_RESULTS_DIR=${FILE_WRITE_RESULTS_DIR:-"/tmp/writeResults"}
-ANALYZED_PACKAGES_DIR=${ANALYZED_PACKAGES_DIR:-"/tmp/analyzedPackages"}
-LOGS_DIR=${LOGS_DIR:-"/tmp/dockertmp"}
-STRACE_LOGS_DIR=${STRACE_LOGS_DIR:-"/tmp/straceLogs"}
+
+# RESULTS_DIR=${RESULTS_DIR:-"/tmp/results"}
+# STATIC_RESULTS_DIR=${STATIC_RESULTS_DIR:-"/tmp/staticResults"}
+# FILE_WRITE_RESULTS_DIR=${FILE_WRITE_RESULTS_DIR:-"/tmp/writeResults"}
+# ANALYZED_PACKAGES_DIR=${ANALYZED_PACKAGES_DIR:-"/tmp/analyzedPackages"}
+# LOGS_DIR=${LOGS_DIR:-"/tmp/dockertmp"}
+# STRACE_LOGS_DIR=${STRACE_LOGS_DIR:-"/tmp/straceLogs"}
 
 # for pretty printing
 LINE="-----------------------------------------"
@@ -117,6 +118,14 @@ done
 if [[ $# -eq 0 ]]; then
 	HELP=1
 fi
+
+RESULTS_DIR=${RESULTS_DIR:-"/tmp/results/${ECOSYSTEM}/${PACKAGE}"}
+STATIC_RESULTS_DIR=${STATIC_RESULTS_DIR:-"/tmp/staticResults/${ECOSYSTEM}/${PACKAGE}"}
+FILE_WRITE_RESULTS_DIR=${FILE_WRITE_RESULTS_DIR:-"/tmp/writeResults/${ECOSYSTEM}/${PACKAGE}"}
+ANALYZED_PACKAGES_DIR=${ANALYZED_PACKAGES_DIR:-"/tmp/analyzedPackages/${ECOSYSTEM}/${PACKAGE}"}
+LOGS_DIR=${LOGS_DIR:-"/tmp/dockertmp"}
+STRACE_LOGS_DIR=${STRACE_LOGS_DIR:-"/tmp/straceLogs"}
+
 
 DOCKER_OPTS=("run" "--cgroupns=host" "--privileged" "--rm")
 

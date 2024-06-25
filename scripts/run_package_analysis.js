@@ -1,6 +1,8 @@
 const { spawn } = require('child_process');
 const path = require('path')
 
+
+
 function run_package_analysis(package_name, package_ecosystem, res) {
     const cmd = [
         path.join(__dirname, '../package-analysis/scripts/run_analysis.sh'),
@@ -32,14 +34,21 @@ function run_package_analysis(package_name, package_ecosystem, res) {
 
     // Handle process close event
     proc.on('close', (code) => {
+
         if (code === 0) {
             console.log(`[D] ${package_name}: success`);
+            // TODO read logs analysis package, preprocess to ML model
+            
+            
+
+
             res.send(`Package Name: ${package_name}, Ecosystem: ${package_ecosystem}`);
         } else {
             console.error(`[!] Error in ${package_name}:${package_ecosystem} (returncode=${code})`);
             res.status(500).send(`Internal Server Error (return code: ${code})`);
         }
     });
+
 
     // Handle unexpected errors
     proc.on('error', (err) => {
