@@ -30,7 +30,8 @@ function routes (app){
 
     app.use('/about', aboutRouter)
 
-    app.use('/checkSource', checkSourceRouter)
+    app.use('/checksource', checkSourceRouter)
+
 
     app.use('*', notFoundRouter)
 

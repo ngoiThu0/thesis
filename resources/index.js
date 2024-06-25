@@ -6,13 +6,17 @@ const routes = require('./routes/main')
 
 require('dotenv').config()
 
+
+
 const app = express()
 
 //setting public, views and partials folders
 app.use(express.static(path.join(__dirname, '../public')))
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+
 
 //template engine
 app.engine('hbs', handlebars.engine({
