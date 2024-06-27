@@ -45,6 +45,7 @@ function run_package_analysis(package_name, package_ecosystem, res) {
 
             pythonProcess.stdout.on('data', (data) => {
                 console.log(`stdout: ${data}`);
+                data = data.toString();
                 
                 let percentageRegex = /\b\d+(.\d+)?%/g;
                 let match = data.match(percentageRegex);
