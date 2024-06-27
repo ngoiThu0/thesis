@@ -7,30 +7,40 @@ function run_model(package_name, package_ecosystem, package_version, res){
     const pythonScriptPath = path.join(__dirname, './read_json.py');
 
     const pythonProcess = spawn('python', [pythonScriptPath, package_name, package_ecosystem, package_version]);
-
+    let text = '';
     pythonProcess.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
-        data = data.toString();
-        
-        let percentageRegex = /\b\d+(.\d+)?%/g;
-        let match = data.match(percentageRegex);
-        let percentage = match ? match[0] : '';
-
-        let lines = data.trim().split('\n');
-        let dataLine = lines.find(line => line.includes('express_'));
-        let numbers;
-        if (dataLine) {
-            numbers = dataLine.trim().split(/\s+/).filter(item => !isNaN(parseInt(item))).map(item => parseInt(item));
-            console.log("Numbers:", numbers);
-        }
-
-        res.json({name: package_name, ecosystem: package_ecosystem, version: package_version, percentage: percentage, commands: numbers[1], domains: numbers[2], ips: numbers[3]});
+        text += data.toString();
     });
     
     pythonProcess.stderr.on('data', (data) => {
         console.error(`stderr: ${data}`);
     });
 
+    pythonProcess.on('close', (code) => {
+        // console.log(text);
+        
+        if(code === 0){
+            console.log("Run model Success.\n");
+            let percentageRegex = /\b\d+(.\d+)?%/g;
+            let match = text.match(percentageRegex);
+            let percentage = match ? match[0] : '';
+
+            let lines = text.trim().split('\n');
+            let dataLine = lines.find(line => line.includes('express_'));
+            let numbers;
+            if (dataLine) {
+                numbers = dataLine.trim().split(/\s+/).filter(item => !isNaN(parseInt(item))).map(item => parseInt(item));
+                console.log("Numbers:", numbers);
+            }
+
+            res.json({name: package_name, ecosystem: package_ecosystem, version: package_version, percentage: percentage, commands: numbers[1], domains: numbers[2], ips: numbers[3]});
+        } else {
+            console.error(`[!] Error in ${package_name}:${package_ecosystem} (returncode=${code})`);
+            res.status(500).json({error: `Internal Server Error (return code: ${code})`});
+
+        }
+    })
     pythonProcess.unref();
 
 }
