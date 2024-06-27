@@ -100,7 +100,7 @@ print(df_npm)
 
 #train model 
 
-df = pd.read_csv("/thesis/scripts/dataset_df.csv")
+df = pd.read_csv("/projects/thesis/scripts/dataset_df.csv")
 
 df = df.reindex(np.random.permutation(df.index)) # shuffle the training set
 
