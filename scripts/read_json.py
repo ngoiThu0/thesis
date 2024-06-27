@@ -14,17 +14,12 @@ from sklearn.model_selection import train_test_split
 
 
 
-
-
-# package_ecosystem = "npm"
-# package_name = "lodash"
-
 if len(sys.argv) != 3:
     print("Usage: python read_json.py <package_name> <package_ecosystem>")
     sys.exit(1)
 
-    package_name = sys.argv[1]
-    package_ecosystem = sys.argv[2]
+package_name = sys.argv[1]
+package_ecosystem = sys.argv[2]
 
 print(package_ecosystem, '--', package_name)
 
