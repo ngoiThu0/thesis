@@ -65,7 +65,7 @@ $(".checksource-form").addEventListener("submit", function(event) {
         })
         .then(response => {
             if (!response.ok) {
-                html = `<div>${response.json()}</div>`
+                throw new Error('Response not ok - Status: ' + response.status);
             }
             return response.json();
         })
