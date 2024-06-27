@@ -45,7 +45,7 @@ function run_package_analysis(package_name, package_ecosystem, res) {
 
             pythonProcess.stdout.on('data', (data) => {
                 console.log(`stdout: ${data}`);
-                res.json({data: stdout});
+                res.json({data: data});
             });
             
             pythonProcess.stderr.on('data', (data) => {
