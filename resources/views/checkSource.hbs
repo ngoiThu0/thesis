@@ -1,6 +1,6 @@
 <section class="checksourcepage">
     <div class="checksource-block">
-        <form mathod="post" class="checksource-form" action="/checksource">
+        <form mathod="post" class="checksource-form form" action="/checksource">
             <div class="checksource-input">
                 {{!-- <input type="text" placeholder="Github link to source code..." class="checksource-link"> --}}
                 <input type="text" placeholder="package name" class="checksource-name" name="package-name" required>
@@ -11,8 +11,29 @@
                 <b>Please type name and ecosystem of open source you want to check out...</b>
             </div>
         </form>
-        <div class="checksource-loading">
+        {{!-- <div class="checksource-loading form">
             <img src="/image/loadingbar.gif" alt="Không thể tải gif" autoplay muted>
+        </div> --}}
+
+        <div class="loading-form form">
+            {{!-- <p class="loader"></p> --}}
+            <div class="loading-loader">
+                <div class="loader"></div>
+            </div>
+            <div class="text-loader"><b>The system is analyzing, please wait a moment...</b></div>
+        </div>
+
+        <div class="result-form form">
+            <div class="sample-info">
+                <div class="sample-name">Sample name: </div>
+                <div class="sample-ecosystem">Ecosystem: </div>
+                <div class="sample-version">Version: </div>
+            </div>
+            <h4>The probability of the sample being in benign is:</h4>
+            <form action="/checksource">
+                <input type="submit" class="newcheck" value="New Check">
+            </form>
+            {{!-- <button class="newcheck"><b>New Check</b></button> --}}
         </div>
 
         {{!-- <div class="progress">

@@ -43,6 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
 $(".checksource-form").addEventListener("submit", function(event) {
     event.preventDefault(); // Ngăn chặn việc submit form mặc định
 
+    $('.loading-form').style.display = 'block';
+    $('.checksource-form').style.display = 'none';
+
     var sourceName = $(".checksource-name").value // Lấy giá trị từ ô source name
     var sourceEcosystem = $(".checksource-ecosystem").value // Lấy giá trị của ô source version
     console.log(sourceName)
@@ -60,15 +63,20 @@ $(".checksource-form").addEventListener("submit", function(event) {
         .then(response => response.json())
         .then(data => {
             console.log('Đã gửi dữ liệu:', data);
+
+            
             
         })
         .catch(error => {
             console.error('Lỗi khi gửi dữ liệu:', error);
             
         });
+
+        $('.loading-form').style.display = 'none';
+        $('.result-form').style.display = 'block';
         $('.checksource-name').value = ''
         $('.checksource-ecosystem').value = ''
     } else {
-        alert("")
+        alert(" Vui lòng nhập thông tin trước.")
     }
 });
