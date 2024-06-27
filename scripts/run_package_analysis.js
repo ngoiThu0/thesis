@@ -45,7 +45,19 @@ function run_package_analysis(package_name, package_ecosystem, res) {
 
             pythonProcess.stdout.on('data', (data) => {
                 console.log(`stdout: ${data}`);
-                res.json({data: data});
+                
+                let percentageRegex = /\b\d+(.\d+)?%/g;
+                let match = stdout.match(percentageRegex);
+                let percentage = match ? match[0] : '';
+
+                let lines = stdout.trim().split('\n');
+                let dataLine = lines.find(line => line.includes('express_'));
+                if (dataLine) {
+                    let numbers = dataLine.trim().split(/\s+/).filter(item => !isNaN(parseInt(item))).map(item => parseInt(item));
+                    console.log("Numbers:", numbers);
+                }
+
+                res.json({percentage: percentage, commands: numbers[1], domains: numbers[2], ips: numbers[3]});
             });
             
             pythonProcess.stderr.on('data', (data) => {
