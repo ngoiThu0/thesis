@@ -63,7 +63,12 @@ $(".checksource-form").addEventListener("submit", function(event) {
             },
             body: JSON.stringify({ name: sourceName, ecosystem: sourceEcosystem , version: sourceVersion }),
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                html = `<div>${response.json()}</div>`
+            }
+            return response.json();
+        })
         .then(data => {
             console.log('Đã gửi dữ liệu:', data);
 
