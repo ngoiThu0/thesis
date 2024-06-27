@@ -47,10 +47,10 @@ function run_package_analysis(package_name, package_ecosystem, res) {
                 console.log(`stdout: ${data}`);
                 
                 let percentageRegex = /\b\d+(.\d+)?%/g;
-                let match = stdout.match(percentageRegex);
+                let match = data.match(percentageRegex);
                 let percentage = match ? match[0] : '';
 
-                let lines = stdout.trim().split('\n');
+                let lines = data.trim().split('\n');
                 let dataLine = lines.find(line => line.includes('express_'));
                 if (dataLine) {
                     let numbers = dataLine.trim().split(/\s+/).filter(item => !isNaN(parseInt(item))).map(item => parseInt(item));
