@@ -64,16 +64,14 @@ $(".checksource-form").addEventListener("submit", function(event) {
         .then(data => {
             console.log('Đã gửi dữ liệu:', data);
 
-            
+            $('.loading-form').style.display = 'none';
+            $('.result-form').style.display = 'block';
             
         })
         .catch(error => {
             console.error('Lỗi khi gửi dữ liệu:', error);
             
         });
-
-        $('.loading-form').style.display = 'none';
-        $('.result-form').style.display = 'block';
         $('.checksource-name').value = ''
         $('.checksource-ecosystem').value = ''
     } else {

@@ -40,23 +40,22 @@ function run_package_analysis(package_name, package_ecosystem, res) {
             // TODO read logs analysis package, preprocess to ML model
 
             const pythonScriptPath = path.join(__dirname, './read_json.py');
-            exec(`python ${pythonScriptPath}`, (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`Lỗi khi chạy lệnh: ${error.message}`);
-                    return;
-                }
-                if (stderr) {
-                    console.error(`Lỗi tiêu chuẩn: ${stderr}`);
-                    return;
-                }
-                console.log(`Kết quả: ${stdout}`);
-                res.send(stdout);
+
+            const pythonProcess = spawn('python', [pythonScriptPath, package_name, package_ecosystem]);
+
+            pythonProcess.stdout.on('data', (data) => {
+                console.log(`stdout: ${data}`);
+                res.json({data: stdout});
+            });
+            
+            pythonProcess.stderr.on('data', (data) => {
+                console.error(`stderr: ${data}`);
             });
 
-            res.send(`Package Name: ${package_name}, Ecosystem: ${package_ecosystem}`);
+            // res.send(`Package Name: ${package_name}, Ecosystem: ${package_ecosystem}`);
         } else {
             console.error(`[!] Error in ${package_name}:${package_ecosystem} (returncode=${code})`);
-            res.status(500).send(`Internal Server Error (return code: ${code})`);
+            res.status(500).json({error: `Internal Server Error (return code: ${code})`});
         }
     });
 

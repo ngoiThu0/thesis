@@ -26,6 +26,8 @@ if len(sys.argv) != 3:
     package_name = sys.argv[1]
     package_ecosystem = sys.argv[2]
 
+print(package_ecosystem, '--', package_name)
+
 LOG_DIR = f"/tmp/results/{package_ecosystem}/{package_name}"
 
 try:
@@ -41,7 +43,7 @@ try:
         print(json_file)
         
 except FileNotFoundError:
-    print(f"Directory '{folder_path}' not found.")
+    print(f"Directory '{LOG_DIR}' not found.")
 except Exception as e:
     print(f"An error occurred: {e}")
 
@@ -103,7 +105,7 @@ print(df_npm)
 
 #train model 
 
-df = pd.read_csv("/home/kali/thesis/thesis/scripts/dataset_df.csv")
+df = pd.read_csv("/thesis/scripts/dataset_df.csv")
 
 df = df.reindex(np.random.permutation(df.index)) # shuffle the training set
 
