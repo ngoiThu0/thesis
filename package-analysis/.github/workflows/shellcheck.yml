@@ -1,0 +1,23 @@
+
+name: 'Shellcheck'
+
+on:
+  push:
+    paths:
+      - '**.sh'
+
+  pull_request:
+    paths:
+      - '**.sh'
+
+permissions:
+  contents: read
+
+jobs:
+  check-scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: 'Check scripts in all directories'
+        run: make check_scripts

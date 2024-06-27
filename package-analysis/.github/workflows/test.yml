@@ -1,0 +1,33 @@
+name: "Test"
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**.md'
+
+permissions: read-all
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+    - uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5.0.0
+      with:
+        go-version: '1.21.0'
+    - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+      with:
+        node-version: 18
+    - name: Install libpcap-dev
+      run: sudo apt-get install -y libpcap-dev
+    - name: Run tests
+      run: go test -v -skip "TestDownload/crates.io_rand_valid_version" ./...
+  run-linter:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+    - uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5.0.0
+      with:
+        go-version: '1.21.0'
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@3cfe3a4abbb849e10058ce4af15d205b6da42804 # v4.0.0
