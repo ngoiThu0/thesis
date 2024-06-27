@@ -14,7 +14,7 @@ from sklearn.model_selection import train_test_split
 
 
 
-if len(sys.argv) != 3:
+if len(sys.argv) != 4:
     print("Usage: python read_json.py <package_name> <package_ecosystem> <package_version>")
     sys.exit(1)
 
