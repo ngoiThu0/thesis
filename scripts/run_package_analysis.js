@@ -1,16 +1,70 @@
 const { exec, spawn } = require('child_process');
-const path = require('path')
+const path = require('path');
+const fs = require('fs');
+
+
+function run_model(package_name, package_ecosystem, package_version, res){
+    const pythonScriptPath = path.join(__dirname, './read_json.py');
+
+    const pythonProcess = spawn('python', [pythonScriptPath, package_name, package_ecosystem, package_version]);
+
+    pythonProcess.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`);
+        data = data.toString();
+        
+        let percentageRegex = /\b\d+(.\d+)?%/g;
+        let match = data.match(percentageRegex);
+        let percentage = match ? match[0] : '';
+
+        let lines = data.trim().split('\n');
+        let dataLine = lines.find(line => line.includes('express_'));
+        let numbers;
+        if (dataLine) {
+            numbers = dataLine.trim().split(/\s+/).filter(item => !isNaN(parseInt(item))).map(item => parseInt(item));
+            console.log("Numbers:", numbers);
+        }
+
+        res.json({name: package_name, ecosystem: package_ecosystem, version: package_version, percentage: percentage, commands: numbers[1], domains: numbers[2], ips: numbers[3]});
+    });
+    
+    pythonProcess.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+    });
+
+    pythonProcess.unref();
+
+}
 
 
 
-function run_package_analysis(package_name, package_ecosystem, res) {
+function run_package_analysis(package_name, package_ecosystem, package_version, res) {
+
+    let checkExist;
+    const jsonPath = `/tmp/results/${package_ecosystem}/${package_name}/${package_version}.json`;
+    fs.access(jsonPath, fs.constants.F_OK, (err) => {
+        if (err) {
+            console.log('File does not exist.');
+            checkExist = false;
+        } else {
+            console.log('File exists.');
+            checkExist = true;
+        }
+    });
+
+    if (checkExist){
+        run_model(package_name, package_ecosystem, package_version, res);
+        return;
+    }
+
     const cmd = [
         path.join(__dirname, '../package-analysis/scripts/run_analysis.sh'),
         '-nointeractive',
         '-ecosystem',
         package_ecosystem,
         '-package',
-        package_name
+        package_name,
+        '-version',
+        package_version
     ];
 
     // const cmd = [
@@ -38,34 +92,8 @@ function run_package_analysis(package_name, package_ecosystem, res) {
         if (code === 0) {
             console.log(`[D] ${package_name}: success`);
             // TODO read logs analysis package, preprocess to ML model
-
-            const pythonScriptPath = path.join(__dirname, './read_json.py');
-
-            const pythonProcess = spawn('python', [pythonScriptPath, package_name, package_ecosystem]);
-
-            pythonProcess.stdout.on('data', (data) => {
-                console.log(`stdout: ${data}`);
-                data = data.toString();
-                
-                let percentageRegex = /\b\d+(.\d+)?%/g;
-                let match = data.match(percentageRegex);
-                let percentage = match ? match[0] : '';
-
-                let lines = data.trim().split('\n');
-                let dataLine = lines.find(line => line.includes('express_'));
-                let numbers;
-                if (dataLine) {
-                    numbers = dataLine.trim().split(/\s+/).filter(item => !isNaN(parseInt(item))).map(item => parseInt(item));
-                    console.log("Numbers:", numbers);
-                }
-
-                res.json({percentage: percentage, commands: numbers[1], domains: numbers[2], ips: numbers[3]});
-            });
+            run_model(package_name, package_ecosystem, package_version, res)
             
-            pythonProcess.stderr.on('data', (data) => {
-                console.error(`stderr: ${data}`);
-            });
-
             // res.send(`Package Name: ${package_name}, Ecosystem: ${package_ecosystem}`);
         } else {
             console.error(`[!] Error in ${package_name}:${package_ecosystem} (returncode=${code})`);

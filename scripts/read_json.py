@@ -15,36 +15,44 @@ from sklearn.model_selection import train_test_split
 
 
 if len(sys.argv) != 3:
-    print("Usage: python read_json.py <package_name> <package_ecosystem>")
+    print("Usage: python read_json.py <package_name> <package_ecosystem> <package_version>")
     sys.exit(1)
 
 package_name = sys.argv[1]
 package_ecosystem = sys.argv[2]
+package_version = sys.argv[3]
 
 print(package_ecosystem, '--', package_name)
 
-LOG_DIR = f"/tmp/results/{package_ecosystem}/{package_name}"
+LOG_DIR = f"/tmp/results/{package_ecosystem}/{package_name}/{package_version}.json"
+
+# try:
+#     # List all files in the directory
+#     files = os.listdir(LOG_DIR)
+    
+#     # Filter files that end with ".json"
+#     # json_files = [file for file in files if file.endswith(".json")]
+#     json_files
+    
+#     # Print the list of JSON files
+#     # print("JSON Files in Directory:")
+#     # for json_file in json_files:
+#     #     print(json_file)
+        
+# except FileNotFoundError:
+#     print(f"Directory '{LOG_DIR}' not found.")
+# except Exception as e:
+#     print(f"An error occurred: {e}")
+
+# json_results = os.path.join(LOG_DIR, json_files[0])
 
 try:
-    # List all files in the directory
-    files = os.listdir(LOG_DIR)
-    
-    # Filter files that end with ".json"
-    json_files = [file for file in files if file.endswith(".json")]
-    
-    # Print the list of JSON files
-    print("JSON Files in Directory:")
-    for json_file in json_files:
-        print(json_file)
-        
+    with open(LOG_DIR, "r") as json_file:
+        data = json.load(json_file)
 except FileNotFoundError:
     print(f"Directory '{LOG_DIR}' not found.")
 except Exception as e:
     print(f"An error occurred: {e}")
-
-json_results = os.path.join(LOG_DIR, json_files[0])
-with open(json_results, "r") as json_file:
-    data = json.load(json_file)
 
 
 

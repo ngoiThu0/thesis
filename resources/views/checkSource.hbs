@@ -1,12 +1,22 @@
 <section class="checksourcepage">
     <div class="checksource-block">
         <form mathod="post" class="checksource-form form" action="/checksource">
+            <div class="checksource-privacy">
+                <h4>Privacy:</h4>
+                <ul>
+                    <li>Only source in PyPI, npm, RubyGems, Crates.io, Packagist.</li>
+                </ul>
+            </div>
             <div class="checksource-input">
                 {{!-- <input type="text" placeholder="Github link to source code..." class="checksource-link"> --}}
                 <input type="text" placeholder="package name" class="checksource-name" name="package-name" required>
-                <input type="text" placeholder="ecosystem" class="checksource-ecosystem" name="package-ecosystem" required>
-                <input type="submit" value="" class="checksource-submit">
+                <div class="checksource-flex">
+                    <input type="text" placeholder="ecosystem" class="checksource-ecosystem small" name="package-ecosystem" required>
+                    <input type="text" placeholder="version" class="checksource-version small" name="package-version" required>
+                    <input type="submit" value="" class="checksource-submit">
+                </div>
             </div>
+            
             <div>
                 <b>Please type name and ecosystem of open source you want to check out...</b>
             </div>
@@ -25,11 +35,14 @@
 
         <div class="result-form form">
             <div class="sample-info">
-                <div class="sample-name">Sample name: </div>
+                {{!-- <div class="sample-name">Sample name: </div>
                 <div class="sample-ecosystem">Ecosystem: </div>
                 <div class="sample-version">Version: </div>
+                <div>Commands: </div>
+                <div>Domains: </div>
+                <div>IPs: </div> --}}
             </div>
-            <h4>The probability of the sample being in benign is:</h4>
+            {{!-- <h4 class="final-result"></h4> --}}
             <form action="/checksource">
                 <input type="submit" class="newcheck" value="New Check">
             </form>

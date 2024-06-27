@@ -46,9 +46,12 @@ $(".checksource-form").addEventListener("submit", function(event) {
     $('.loading-form').style.display = 'block';
     $('.checksource-form').style.display = 'none';
 
-    var sourceName = $(".checksource-name").value // Lấy giá trị từ ô source name
-    var sourceEcosystem = $(".checksource-ecosystem").value // Lấy giá trị của ô source version
-    console.log(sourceName)
+    var sourceName = $(".checksource-name").value; // Lấy giá trị từ ô source name
+    var sourceEcosystem = $(".checksource-ecosystem").value; // Lấy giá trị của ô source ecosystem
+    var sourceVersion = $(".checksource-version").value;
+    console.log(sourceName);
+
+    let html = '';
   
     // Kiểm tra xem giá trị có tồn tại và không rỗng
     if (sourceName.trim() !== "" && sourceEcosystem.trim() !== "") {
@@ -58,22 +61,36 @@ $(".checksource-form").addEventListener("submit", function(event) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name: sourceName, ecosystem: sourceEcosystem  }),
+            body: JSON.stringify({ name: sourceName, ecosystem: sourceEcosystem , version: sourceVersion }),
         })
         .then(response => response.json())
         .then(data => {
             console.log('Đã gửi dữ liệu:', data);
 
+            html = `<div class="sample-name">Sample name: ${data.name || sourceName}</div>
+                <div class="sample-ecosystem">Ecosystem: ${data.ecosystem || sourceEcosystem}</div>
+                <div class="sample-version">Version: ${data.version || sourceVersion}</div>
+                <div>Commands: ${data.commands}</div>
+                <div>Domains: ${data.domains}</div>
+                <div>IPs: ${data.ips}</div>
+                <h4 class="final-result">The probability of the sample being in benign is: ${data.percentage}</h4>`;
+            
+            $('.sample-info').innerHTML = html;
             $('.loading-form').style.display = 'none';
             $('.result-form').style.display = 'block';
-            
+
         })
         .catch(error => {
             console.error('Lỗi khi gửi dữ liệu:', error);
+            html = `<div>Source not found!!!</div>`;
+            $('.sample-info').innerHTML = html;
+            $('.loading-form').style.display = 'none';
+            $('.result-form').style.display = 'block';
             
         });
-        $('.checksource-name').value = ''
-        $('.checksource-ecosystem').value = ''
+        $('.checksource-name').value = '';
+        $('.checksource-ecosystem').value = '';
+        $('.checksource-version').value = '';
     } else {
         alert(" Vui lòng nhập thông tin trước.")
     }

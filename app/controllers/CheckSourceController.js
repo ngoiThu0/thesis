@@ -8,9 +8,10 @@ class CheckSourceController {
     }
 
     post(req, res) {
-        const packageName = req.body.name;
-        const ecosystem = req.body.ecosystem;
-        run_package_analysis(packageName, ecosystem, res);
+        const packageName = req.body?.name;
+        const ecosystem = req.body?.ecosystem;
+        const version = req.body?.version;
+        run_package_analysis(packageName, ecosystem, version, res);
     }
 }
 

@@ -334,7 +334,7 @@ section{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -80%);
     text-align: center;
 }
 
@@ -350,10 +350,23 @@ section{
     animation: slideDown forwards 1s;
 }
 
-.checksourcepage .checksource-form .checksource-input{
+.checksourcepage .checksource-form .checksource-privacy{
+    padding: 10px;
+    font-weight: bold;
+    margin: 30px 0;
+    text-align: start;
+    border: 2px solid #000000;
+    border-radius: 10px;
+}
+
+.checksourcepage .checksource-form .checksource-name{
     width: 100%;
+}
+
+.checksourcepage .checksource-form .checksource-flex{
     display: flex;
 }
+
 
 .checksourcepage .checksource-form .checksource-link{
     width: 100%;
@@ -363,12 +376,16 @@ section{
 }
 
 .checksourcepage .checksource-form input{
-    margin: 0 5px;
+    margin: 5px 5px;
     width: 100%;
     padding: 5px;
     border: 2px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.checksourcepage .checksource-form .small{
+    width: 100%;
 }
 
 .checksourcepage .checksource-form .checksource-submit{
