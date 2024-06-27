@@ -53,8 +53,9 @@ function run_package_analysis(package_name, package_ecosystem, res) {
 
                 let lines = data.trim().split('\n');
                 let dataLine = lines.find(line => line.includes('express_'));
+                let numbers;
                 if (dataLine) {
-                    let numbers = dataLine.trim().split(/\s+/).filter(item => !isNaN(parseInt(item))).map(item => parseInt(item));
+                    numbers = dataLine.trim().split(/\s+/).filter(item => !isNaN(parseInt(item))).map(item => parseInt(item));
                     console.log("Numbers:", numbers);
                 }
 
