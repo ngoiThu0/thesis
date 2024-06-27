@@ -46,26 +46,7 @@ function run_model(package_name, package_ecosystem, package_version, res){
 }
 
 
-
-function run_package_analysis(package_name, package_ecosystem, package_version, res) {
-
-    let checkExist;
-    const jsonPath = `/tmp/results/${package_ecosystem}/${package_name}/${package_version}.json`;
-    fs.access(jsonPath, fs.constants.F_OK, (err) => {
-        if (err) {
-            console.log('File does not exist.');
-            checkExist = false;
-        } else {
-            console.log('File exists.');
-            checkExist = true;
-        }
-    });
-
-    if (checkExist){
-        run_model(package_name, package_ecosystem, package_version, res);
-        return;
-    }
-
+function run_package(package_name, package_ecosystem, package_version, res){
     const cmd = [
         path.join(__dirname, '../package-analysis/scripts/run_analysis.sh'),
         '-nointeractive',
@@ -76,13 +57,6 @@ function run_package_analysis(package_name, package_ecosystem, package_version, 
         '-version',
         package_version
     ];
-
-    // const cmd = [
-    //     'python',
-    //     '/home/kali/thesis/thesis/scripts/run_package_analysis.py',
-    //     package_name,
-    //     package_ecosystem
-    // ];
 
     console.log("Executing command:", cmd.join(' '));  // Print the command being executed for debugging purposes
 
@@ -119,7 +93,37 @@ function run_package_analysis(package_name, package_ecosystem, package_version, 
     });
 
     // Detach the child process to allow the parent Node.js process to exit independently
-    proc.unref();
+    proc.unref();  
+}
+
+
+function run_package_analysis(package_name, package_ecosystem, package_version, res) {
+
+    let checkExist = false;
+    const jsonPath = `/tmp/results/${package_ecosystem}/${package_name}/${package_version}.json`;
+
+    try {
+        if(fs.existsSync(jsonPath)){
+            run_model(package_name, package_ecosystem, package_version, res);
+        } else {
+            console.log('File does not exist.');
+            run_package(package_name, package_ecosystem, package_version, res);
+        }
+        
+    } catch (error) {
+        console.error('Error checking file existence:', err);
+        run_package(package_name, package_ecosystem, package_version, res);
+    }
+    // fs.access(jsonPath, fs.constants.F_OK, (err) => {
+    //     if (err) {
+    //         run_model(package_name, package_ecosystem, package_version, res);
+    //         console.log('File does not exist.');
+    //         // checkExist = false;
+    //     } else {
+            
+    //     }
+    // });
+
 }
 
 module.exports = {
