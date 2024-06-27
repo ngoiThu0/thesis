@@ -22,7 +22,7 @@ package_name = sys.argv[1]
 package_ecosystem = sys.argv[2]
 package_version = sys.argv[3]
 
-print(package_ecosystem, '--', package_name)
+# print(package_ecosystem, '--', package_name)
 
 LOG_DIR = f"/tmp/results/{package_ecosystem}/{package_name}/{package_version}.json"
 
