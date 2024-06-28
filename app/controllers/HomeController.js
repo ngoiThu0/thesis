@@ -4,7 +4,7 @@ class HomeController{
             re.render('xq')
         }
         else{
-            console.log('dcu dday la homeies')
+            // console.log('dcu dday la homeies')
             res.render('home')
         }
     }
