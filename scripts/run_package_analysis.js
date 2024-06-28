@@ -27,7 +27,7 @@ function run_model(package_name, package_ecosystem, package_version, res){
             let percentage = match ? match[0] : '';
 
             let lines = text.trim().split('\n');
-            let dataLine = lines.find(line => line.includes('express_'));
+            let dataLine = lines.find(line => line.includes('benign'));
             let numbers;
             if (dataLine) {
                 numbers = dataLine.trim().split(/\s+/).filter(item => !isNaN(parseInt(item))).map(item => parseInt(item));
