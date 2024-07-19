@@ -2,7 +2,7 @@
 
 
 
-This repository contains the source code and data for the thesis titled **"Dynamic Analysis of Open-Source Packages and Applying Machine Learning for Malicious Open-Source Packages Detection."** The objective of this thesis is to provide data analysis through dynamic analysis using an open-source package named `package-analysis`. The dataset is available in Google BigQuery. Furthermore, this thesis aims to create a methodology to obtain malicious and benign packages and apply machine learning to automatically classify malicious open-source packages.
+This repository contains the source code and data for the thesis titled **"Dynamic Analysis of Open-Source Packages and Applying Machine Learning for Malicious Open-Source Packages Detection."** The objective of this thesis is to provide data analysis through dynamic analysis using an open-source package tool named `package-analysis`. The dataset is available in Google BigQuery. Furthermore, this thesis aims to create a methodology to obtain malicious and benign packages and apply machine learning to automatically classify malicious open-source packages.
 
 ## Table of Contents
 
