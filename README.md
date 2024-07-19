@@ -7,7 +7,7 @@ The dataset is available in Google BigQuery. Further, this thesis aims to create
 
 In this repository, you can find:
 
-*Thesis reports:
+* Thesis reports:
 * Web application to automatically classify malicious npm packages based on results provided by package-analysis tools.
 * Colab Note book for training and evaluating machine models.
 * Dataset for malicious and benign packages.
