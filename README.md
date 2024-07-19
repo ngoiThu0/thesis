@@ -1,15 +1,15 @@
 # Dynamic Analysis of Open-Source Packages and Applying Machine Learning for Malicious Open-Source Packages Detection
 
-![Project Banner](path_to_banner_image)  <!-- Optional: Add a banner image here -->
+
 
 This repository contains the source code and data for the thesis titled **"Dynamic Analysis of Open-Source Packages and Applying Machine Learning for Malicious Open-Source Packages Detection."** The objective of this thesis is to provide data analysis through dynamic analysis using an open-source package named `package-analysis`. The dataset is available in Google BigQuery. Furthermore, this thesis aims to create a methodology to obtain malicious and benign packages and apply machine learning to automatically classify malicious open-source packages.
 
 ## Table of Contents
 
-- [Objective](#objective)
-- [Contents](#contents)
-- [Installation](#installation)
-- [Usage](#usage)
+- [Objective](##objective)
+- [Contents](##contents)
+- [Installation](##installation)
+- [Usage](##usage)
 - [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
@@ -41,13 +41,15 @@ To get started with this project, follow these steps:
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/your_username/your_repository.git
-    cd your_repository
+    https://github.com/ngoiThu0/thesis.git
+    cd thesis
     ```
 
 2. Install the required dependencies:
     ```sh
-    pip install -r requirements.txt
+    npm install
+
+    node resource/index.js
     ```
 
 ## Usage
@@ -57,5 +59,5 @@ To get started with this project, follow these steps:
 To run the web application for classifying npm packages:
 
 ```sh
-cd web_application
-python app.py
+cd cd thesis
+node resource/index.js
