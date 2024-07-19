@@ -1,17 +1,61 @@
-Dynamic analysis of open-source package and applying machine learning for
-malicious open-source packages detection
+# Dynamic Analysis of Open-Source Packages and Applying Machine Learning for Malicious Open-Source Packages Detection
 
-This repository contains the source code and data for the thesis title "Dynamic analysis of open-source package and applying machine learning for
-malicious open-source packages detection." The objective of this thesis is to provide data analysis through dynamic analysis using an using an open source package named package-analysis.
-The dataset is available in Google BigQuery. Further, this thesis aims to create a methodology to obtain malicious and benign packages and apply machine learning to automatically classify malicious open source packages.
+![Project Banner](path_to_banner_image)  <!-- Optional: Add a banner image here -->
+
+This repository contains the source code and data for the thesis titled **"Dynamic Analysis of Open-Source Packages and Applying Machine Learning for Malicious Open-Source Packages Detection."** The objective of this thesis is to provide data analysis through dynamic analysis using an open-source package named `package-analysis`. The dataset is available in Google BigQuery. Furthermore, this thesis aims to create a methodology to obtain malicious and benign packages and apply machine learning to automatically classify malicious open-source packages.
+
+## Table of Contents
+
+- [Objective](#objective)
+- [Contents](#contents)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+
+## Objective
+
+The objective of this thesis is to:
+1. Perform dynamic analysis using the `package-analysis` open-source package.
+2. Obtain and analyze datasets from Google BigQuery.
+3. Create a methodology to distinguish between malicious and benign packages.
+4. Apply machine learning techniques to automatically classify malicious open-source packages.
+
+## Contents
 
 In this repository, you can find:
 
-* Thesis reports:
-* Web application to automatically classify malicious npm packages based on results provided by package-analysis tools.
-* Colab Note book for training and evaluating machine models.
-* Dataset for malicious and benign packages.
-  
+- **Thesis Reports:**
+  - Detailed documentation and findings of the thesis.
+- **Web Application:**
+  - A web application to automatically classify malicious npm packages based on results provided by `package-analysis` tools.
+- **Colab Notebook:**
+  - A Colab notebook for training and evaluating machine learning models.
+- **Dataset:**
+  - Datasets for malicious and benign packages.
 
+## Installation
 
+To get started with this project, follow these steps:
 
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/your_username/your_repository.git
+    cd your_repository
+    ```
+
+2. Install the required dependencies:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+## Usage
+
+### Running the Web Application
+
+To run the web application for classifying npm packages:
+
+```sh
+cd web_application
+python app.py
