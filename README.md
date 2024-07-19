@@ -18,7 +18,7 @@ This repository contains the source code and data for the thesis titled **"Dynam
 
 The objective of this thesis is to:
 1. Perform dynamic analysis using the `package-analysis` open-source package.
-2. Obtain and analyze datasets from Google BigQuery.
+2. Obtain and analyze datasets from [BigQuery dataset](https://console.cloud.google.com/bigquery?d=packages&p=ossf-malware-analysis&t=analysis&page=table).
 3. Create a methodology to distinguish between malicious and benign packages.
 4. Apply machine learning techniques to automatically classify malicious open-source packages.
 
@@ -59,5 +59,5 @@ To get started with this project, follow these steps:
 To run the web application for classifying npm packages:
 
 ```sh
-cd cd thesis
+cd thesis
 node resource/index.js
